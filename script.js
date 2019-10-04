@@ -1,22 +1,3 @@
-/*const goods = [
-    { title: 'Shirt', price: 150 },
-    { title: 'Socks', price: 50 },
-    { title: 'Jacket', price: 350 },
-    { title: 'Shoes', price: 250 },
-    { titl: 'Shoes', pric: 250 },//для проверки работы значений по умолчанию
-];
-
-const renderGoodsItem = (title = 'Товара нет в наличии', price = 'цена отсутствует') => {
-    return `<div class="goods-item"><h3>${title}</h3><p>${price}</p><a href="#" class="add-button">Добавить</a></div>`;
-};
-
-const renderGoodsList = (list) => {
-    let goodsList = list.map(item => renderGoodsItem(item.title, item.price)).join('');
-    document.querySelector('.goods-list').innerHTML = goodsList;
-};
-
-renderGoodsList(goods);
-*/
 class GoodsItem {
     constructor(title, price) {
         this.title = title;
@@ -38,6 +19,15 @@ class GoodsList {
             { title: 'Shoes', price: 250 },
         ];
     }
+    priceTotal(){
+        let sum = 0;
+        this.goods.forEach(function (elem) {
+            sum += elem.price;
+        });
+        let sumCost = document.createElement('p');
+        sumCost.innerHTML = `Суммарная стоимость товаров: $${sum}`;
+        document.querySelector("header").appendChild(sumCost);
+    }
     render() {
         let listHtml = '';
         this.goods.forEach(good => {
@@ -50,5 +40,20 @@ class GoodsList {
 const list = new GoodsList();
 list.fetchGoods();
 list.render();
+list.priceTotal();
 
-console.log(list.goods[0].price);
+//Добавьте пустые классы для корзины товаров и элемента корзины товаров. 
+// Продумайте, какие методы понадобятся для работы с этими сущностями.
+
+/*
+class Cart {
+    //переход к оформлению заказа
+    checkout();
+}
+class CartElement {
+    //изменить количество товара
+    changeQuantity();
+    //удалить товар из корзины
+    remove();
+}
+*/
